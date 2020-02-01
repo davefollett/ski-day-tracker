@@ -1,0 +1,18 @@
+{
+  "name": "ski-day-tracker",
+  "version": "0.0.1",
+  "description": "ski day tracker",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davefollett/ski-day-tracker.git"
+  },
+  "author": "Dave Follett",
+  "license": "ISC",
+  "homepage": "https://github.com/davefollett/ski-day-tracker#readme",
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
+}
