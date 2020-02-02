@@ -24,7 +24,7 @@ export default {
   data: () => ({
     starwars: ''
   }),
-  mounted () {
+  created () {
     axios
       .get(`${process.env.VUE_APP_ROOT_API}/starwars`)
       .then(response => (this.starwars = response.data))
