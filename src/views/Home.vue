@@ -1,18 +1,47 @@
 <template>
   <div class="home">
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    <HelloWorld/>
+    <!-- <HelloWorld/> -->
+    <SkiDayForecast class="ma-2"
+      v-for="day in mtholly.days"
+      :key="day.time"
+      :epoch="day.time"
+      :icon="day.icon"
+      :minTemp="day.temperatureMin"
+      :maxTemp="day.temperatureMax"
+    />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+// import HelloWorld from '@/components/HelloWorld.vue'
+import SkiDayForecast from '@/components/SkiDayForecast.vue'
+const axios = require('axios')
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
+    // HelloWorld,
+    SkiDayForecast
+  },
+  data: () => ({
+    mtholly: {
+      days: [
+        {
+          time: 0,
+          icon: 'none',
+          temperatureMin: 0,
+          temperatureMax: 0
+        }
+      ]
+    }
+  }),
+  created () {
+    axios
+      .get(`${process.env.VUE_APP_ROOT_API}/mtholly`)
+      .then(response => {
+        this.mtholly = response.data
+      })
   }
 }
 </script>
