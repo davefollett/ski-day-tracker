@@ -23,23 +23,14 @@ exports.handler = async (event, context) => {
     days: []
   }
 
-  // const time = metadata.dates[0]
-  // const apiURL = `${baseApiUrl}/${key}/${latitude},${longitude},${time}?exclude=currently,hourly,flags`
-  // const apiURL = buildApiUrl(metadata.days[0])
-  // console.log(apiURL)
   try {
+    // Using for of instead of forEach because of the await inside the loop
     for (const day of metadata.days) {
       const response = await axios.get(buildApiUrl(day))
       status = response.status
       forecast.days.push(response.data.daily.data[0])
     }
 
-    // const response = await axios.get(apiURL)
-    // const response = await axios.get(`${baseApiUrl}/${key}/${latitude},${longitude},${time}`)
-    // console.log(response)
-    // status = response.status
-    // forecast.days.push(response.data.daily.data[0])
-    // body = JSON.stringify(response.data)
     body = JSON.stringify(forecast)
   } catch (error) {
     status = error.response.status
