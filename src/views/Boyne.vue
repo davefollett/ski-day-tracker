@@ -1,8 +1,8 @@
 <template>
-  <div class="home">
-    <p class="display-1 text-center">{{mtholly.name}}</p>
+  <div>
+    <p class="display-1 text-center">{{boyne.name}}</p>
     <SkiDayForecast class="ma-2"
-      v-for="day in mtholly.days"
+      v-for="day in boyne.days"
       :key="day.time"
       :epoch="day.time"
       :summary="day.summary"
@@ -18,12 +18,13 @@ import SkiDayForecast from '@/components/SkiDayForecast.vue'
 const axios = require('axios')
 
 export default {
-  name: 'home',
+  name: 'boyne',
   components: {
     SkiDayForecast
   },
   data: () => ({
-    mtholly: {
+    boyne: {
+      name: 'Boyne Mountain',
       days: [
         {
           time: 0,
@@ -37,9 +38,9 @@ export default {
   }),
   created () {
     axios
-      .get(`${process.env.VUE_APP_ROOT_API}/mtholly`)
+      .get(`${process.env.VUE_APP_ROOT_API}/boyne`)
       .then(response => {
-        this.mtholly = response.data
+        this.boyne = response.data
       })
   }
 }
