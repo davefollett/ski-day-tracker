@@ -6,6 +6,7 @@
       v-for="day in mtholly.days"
       :key="day.time"
       :epoch="day.time"
+      :summary="day.summary"
       :icon="day.icon"
       :minTemp="day.temperatureMin"
       :maxTemp="day.temperatureMax"

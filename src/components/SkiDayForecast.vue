@@ -5,25 +5,26 @@
     raised
   >
     <v-card-title>{{ date }}</v-card-title>
+    <v-card-subtitle>{{ summary }}</v-card-subtitle>
     <v-card-text>
-      <p>
-        Icon: {{ icon }}
-        <br>
-        Low: {{ low }}
-        <br>
-        High: {{ high }}
+      <p>{{ icon }} {{ low }}°F  {{ high }}°F
       </p>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
+import { format } from 'date-fns'
 
 export default {
   name: 'SkiDayForecast',
   props: {
     epoch: {
       type: Number,
+      required: true
+    },
+    summary: {
+      type: String,
       required: true
     },
     icon: {
@@ -42,7 +43,8 @@ export default {
   computed: {
     date: function () {
       const result = new Date(this.epoch * 1000)
-      return `${result.getFullYear()}-${result.getMonth() + 1}-${result.getDate()}`
+      return format(result, 'EEE, MM/dd/yyyy')
+      // return `${result.getFullYear()}-${result.getMonth() + 1}-${result.getDate()}`
     },
     low: function () {
       return Math.round(this.minTemp)
