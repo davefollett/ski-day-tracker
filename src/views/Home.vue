@@ -30,6 +30,7 @@ export default {
       days: [
         {
           time: 0,
+          summary: '',
           icon: 'none',
           temperatureMin: 0,
           temperatureMax: 0

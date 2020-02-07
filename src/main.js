@@ -3,6 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
+import Skycons from 'vue-skycon'
+
+Vue.use(Skycons)
 
 Vue.config.productionTip = false
 
