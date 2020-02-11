@@ -10,6 +10,11 @@
       :minTemp="day.temperatureMin"
       :maxTemp="day.temperatureMax"
     />
+    <v-footer color="primary">
+      <a class="black--text" href="https://darksky.net/poweredby/">Powered by Dark Sky</a>
+      <v-spacer></v-spacer>
+      <div>&copy; {{ new Date().getFullYear() }}</div>
+    </v-footer>
   </div>
 </template>
 
