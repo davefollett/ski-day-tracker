@@ -52,7 +52,6 @@ export default {
     date: function () {
       const result = new Date(this.epoch * 1000)
       return format(result, 'EEE, MM/dd/yyyy')
-      // return `${result.getFullYear()}-${result.getMonth() + 1}-${result.getDate()}`
     },
     low: function () {
       return Math.round(this.minTemp)
@@ -62,18 +61,4 @@ export default {
     }
   }
 }
-// <v-card
-//     class="mx-auto"
-//     max-width="400"
-//     raised
-//   >
-//     <v-card-title>{{ date }}</v-card-title>
-//     <v-card-subtitle>{{ summary }}</v-card-subtitle>
-//     <v-card-text>
-//       <div>
-//       <skycon :condition="icon" width="40" height="40"></skycon>
-//       <p>{{ low }}°F  {{ high }}°F</p>
-//       </div>
-//     </v-card-text>
-//   </v-card>
 </script>
