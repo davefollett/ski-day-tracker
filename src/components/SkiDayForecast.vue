@@ -1,64 +1,57 @@
 <template>
-  <v-card
-    class="mx-auto"
-    max-width="400"
-    raised
-  >
-    <v-list-item three-line>
-      <v-list-item-content>
-        <div class="overline mb-4">{{date}}</div>
-        <v-list-item-title class="headline mb-1">{{ low }}°F  {{ high }}°F</v-list-item-title>
-        <v-list-item-subtitle>{{summary}}</v-list-item-subtitle>
-      </v-list-item-content>
-
-      <v-list-item-avatar
-        tile
-        size="40"
-      >
-      <skycon :condition="icon" width="40" height="40"></skycon>
-      </v-list-item-avatar>
-    </v-list-item>
-  </v-card>
+  <div class="home">
+    <p class="display-1 text-center">{{forecast.name}}</p>
+    <SkiDayForecastCard class="ma-2"
+      v-for="day in forecast.days"
+      :key="day.time"
+      :epoch="day.time"
+      :summary="day.summary"
+      :icon="day.icon"
+      :minTemp="day.temperatureMin"
+      :maxTemp="day.temperatureMax"
+    />
+    <v-footer color="primary">
+      <a class="black--text" href="https://darksky.net/poweredby/">Powered by Dark Sky</a>
+      <v-spacer></v-spacer>
+      <div>&copy; {{ new Date().getFullYear() }}</div>
+    </v-footer>
+  </div>
 </template>
 
 <script>
-import { format } from 'date-fns'
+import SkiDayForecastCard from '@/components/SkiDayForecastCard.vue'
+const axios = require('axios')
 
 export default {
   name: 'SkiDayForecast',
+  components: {
+    SkiDayForecastCard
+  },
   props: {
-    epoch: {
-      type: Number,
-      required: true
-    },
-    summary: {
+    location: {
       type: String,
-      required: true
-    },
-    icon: {
-      type: String,
-      required: true
-    },
-    minTemp: {
-      type: Number,
-      required: true
-    },
-    maxTemp: {
-      type: Number,
       required: true
     }
   },
-  computed: {
-    date: function () {
-      const result = new Date(this.epoch * 1000)
-      return format(result, 'EEE, MM/dd/yyyy')
-    },
-    low: function () {
-      return Math.round(this.minTemp)
-    },
-    high: function () {
-      return Math.round(this.maxTemp)
+  data: () => ({
+    forecast: {
+      days: [
+        {
+          time: 0,
+          summary: '',
+          icon: 'none',
+          temperatureMin: 0,
+          temperatureMax: 0
+        }
+      ]
     }
+  }),
+  created () {
+    axios
+      .get(`${process.env.VUE_APP_ROOT_API}/${this.location}`)
+      .then(response => {
+        this.forecast = response.data
+      })
   }
 }
 </script>
