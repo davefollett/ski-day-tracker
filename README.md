@@ -15,7 +15,7 @@ Ski Day Tracker is a personal project I created to track the weather forecast of
 ### Prerequisites 
 
 * [Node.js](https://nodejs.org/en/) version 10 or higher
-* A Dark Ski API account
+* A [Dark Ski API](https://darksky.net/dev) account
 
 ### Global Package Installation
 
