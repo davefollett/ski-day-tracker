@@ -6,11 +6,8 @@
         <SkiDayForecastCard class="ma-2"
           v-for="day in forecast.days"
           :key="day.time"
-          :epoch="day.time"
-          :summary="day.summary"
-          :icon="day.icon"
-          :minTemp="day.temperatureMin"
-          :maxTemp="day.temperatureMax"
+          :forecast="day"
+          :coordinate="forecast.location"
         />
       </div>
       <div v-else>
